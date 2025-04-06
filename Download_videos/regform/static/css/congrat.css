@@ -1,0 +1,115 @@
+/* General body styling */
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #040204;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+.tick {
+  height: 100px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Container styling */
+.v3_3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* YouTube Section */
+.musdisk {
+  width: 70%;
+  margin-bottom: 20px;
+  background-color: #040204;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.3s;
+}
+
+.musdisk:hover {
+  transform: scale(1.05);
+}
+
+.musdisk figure {
+  margin: 0;
+}
+
+.musdisk img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.figa {
+  background: -webkit-linear-gradient(rgba(178, 254, 250, 1), rgba(14, 210, 247, 1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.2vw;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* API Section */
+.da {
+  width: 70%;
+}
+
+.api_but {
+  width: 70%;
+  margin-top: 20px;
+  background-color: #040204;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.3s;
+}
+
+.api_but:hover {
+  transform: scale(1.05);
+}
+
+.api_but figure {
+  margin: 0;
+}
+
+.api_but img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Congratulations text */
+.v3_2 {
+  margin-top: 20px;
+}
+
+.v3_4 {
+  width: 80%;
+  height: 200px;
+  background-color: #333;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.v3_5 {
+  font-size: 4vw;
+  background: -webkit-linear-gradient(rgba(178, 254, 250, 1), rgba(14, 210, 247, 1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  margin-top: 30px;
+}

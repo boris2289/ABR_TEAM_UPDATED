@@ -1,0 +1,18 @@
+{
+    "token": "e90c51d0c3ed812093b0a38ed0265e89e4a34eb9"
+}
+
+
+
+
+
+
+
+
+
+http://127.0.0.1:1278/api/youtube-links/
+http://127.0.0.1:1278/api/youtube-links/2/
+http://127.0.0.1:1278/api/youtube-links/2/comments -> {
+  "youtube_link": 2,
+  "text": "This is a comment on the video!"
+}

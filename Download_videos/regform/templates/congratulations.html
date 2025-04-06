@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download from YouTube</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/congrat.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"/>
+</head>
+<body>
+    <div class="v3_3">
+        <!-- Layout Section: Green tick on the left, Buttons on the right -->
+        <div class="layout">
+            <!-- Green tick on the left -->
+            <div class="green-tick">
+                <img src="/static/Images/green-tick.gif" alt="Green Tick" class="tick">
+            </div>
+
+            <!-- Buttons on the right -->
+            <div class="buttons">
+                <!-- YouTube Section -->
+                <button class="musdisk" onclick="location.href = '/collector/'">
+                    <figure>
+                        <img class="new" src="/static/Images/YouTube-White-Full-Color-Dark-Background-Logo.wine.svg" alt="YouTube">
+                        <figcaption class="figa">Download from YouTube</figcaption>
+                    </figure>
+                </button>
+
+                <!-- API Section -->
+                <button class="api_but"  onclick="location.href = '/saved_links/'">
+                    <figure>
+                        <img class="new" src="/static/Images/api.png" alt="API">
+                        <figcaption class="figa">Download from API</figcaption>
+                    </figure>
+                </button>
+            </div>
+        </div>
+
+        <!-- Congratulations Message Section -->
+        <div class="v3_2">
+            <span class="v3_5">Congratulations!!!!</span>
+        </div>
+    </div>
+</body>
+</html>

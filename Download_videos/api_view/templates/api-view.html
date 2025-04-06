@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API save data</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/api-view.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="{% static 'scripts/script.js' %}"> </script>
+</head>
+<body>
+<div class="container">
+        <h1>YouTube Link Extractor</h1>
+        <div id="loading" class="loading">Loading YouTube links...</div>
+        <div id="youtubeLinks" class="youtube-links">
+        </div>
+
+<form method="POST" action="{% url 'clicked_link' %}" id="form1">
+    {% csrf_token %}
+    <input type="hidden" name="youtube_link" id="youtubeLinkInput">
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    async function fetchYouTubeLinks() {
+        try {
+            const apiUrl = "http://127.0.0.1:1278/api/youtube-links/";
+            const token = "42a50310684d713e3d248c4b7c417d1933dd8f66";
+
+            const response = await fetch(apiUrl, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Token ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            document.getElementById("loading").style.display = "none";
+
+            displayYouTubeLinks(data);
+        } catch (error) {
+            console.error("Error fetching YouTube links:", error);
+            document.getElementById("loading").textContent = "Failed to load links.";
+        }
+    }
+
+
+        function displayYouTubeLinks(links) {
+            const container = document.getElementById("youtubeLinks");
+
+            links.forEach(link => {
+                const linkElement = document.createElement("div");
+                linkElement.classList.add("youtube-link");
+
+                const linkUrl = document.createElement("a");
+                linkUrl.href = link.url;
+                linkUrl.target = "_blank";
+                linkUrl.textContent = link.name;
+
+                const likesCount = document.createElement("p");
+                likesCount.textContent = `Likes: ${link.likes_count}`;
+
+                const commentElement = document.createElement("p");
+                if (link.comments && link.comments.length > 0) {
+                    commentElement.textContent = `Comment: ${link.comments[0].content}`;
+                } else {
+                    commentElement.textContent = "No comments yet.";
+                }
+
+
+        linkUrl.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            const youtubeLinkInput = document.getElementById("youtubeLinkInput");
+
+            if (youtubeLinkInput && link.url) {
+                youtubeLinkInput.value = link.url;
+                console.log("YouTube Link set to:", link.url);
+
+                document.getElementById("form1").submit();
+            } else {
+                console.error("Input element not found or URL is empty");
+            }
+});
+
+                linkElement.appendChild(linkUrl);
+                linkElement.appendChild(likesCount);
+                linkElement.appendChild(commentElement);
+                container.appendChild(linkElement);
+            });
+        }
+
+        fetchYouTubeLinks();
+    });
+</script>
+
+
+</div>
+
+<div class="chose" id ='next'>Choose resolution</div>
+<div class="resolution_pick">
+   {% if mistakes.age_restriction == False and mistakes.empty_link == False %}
+            {% for resolutions in resol %}
+            <form method="POST" class="resolution_button" action="{% url 'load_video' %}">
+                {% csrf_token %}
+                <input type="hidden" name="data_name" value="{{ resolutions }}">
+                <button type="submit" name="form2_submit" value="Submit Form 2" onclick="congr()">{{resolutions}}</button>
+            </form>
+            {% endfor %}
+   {% endif %}
+    {% if mistakes.empty_link == True %}
+        <script>empty_alert_show()</script>
+    {% endif %}
+    {% if mistakes.age_restriction == True %}
+        <script>age_alert_show()</script>
+    {% endif %}
+
+    <script>scroll_to_end()</script>
+</div>
+
+
+</body>
+</html>
