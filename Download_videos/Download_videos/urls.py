@@ -16,14 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
-
 from Download_videos.token_auth import LoginView, LogoutView
 from api_view.views import view_api, clicked_link, load_video
 from link_collector import views
 from link_collector.views import collector
 from regform.views import index_1, congrat, login_page
-from link_collector.views import form1_view, form2_view
-from youtube_links_api.views import protected_view, ProtectedAPIView
+from youtube_links_api.views import UserRegistrationView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,4 +40,5 @@ urlpatterns = [
     path('saved_links/', view_api),
     path('clicked_link/', clicked_link, name='clicked_link'),
     path('load_video/', load_video, name='load_video'),
+    path('register/', UserRegistrationView.as_view(), name='user_register'),
 ]

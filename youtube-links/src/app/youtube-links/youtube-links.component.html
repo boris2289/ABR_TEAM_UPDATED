@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Saved YouTube Links</h2>
+
+  <form (ngSubmit)="createLink()" #linkForm="ngForm">
+    <input type="text" [(ngModel)]="newLink.name" name="name" placeholder="Enter name" required>
+    <input type="url" [(ngModel)]="newLink.url" name="url" placeholder="Enter YouTube URL" required>
+    <input type="text" [(ngModel)]="newLink.description" name="description" placeholder="Enter Video description">
+    <input type="text" [(ngModel)]="newLink.tags" name="tags" placeholder="Enter Video tags">
+    <button type="submit" [disabled]="linkForm.invalid">Add Link</button>
+  </form>
+
+  <button (click)="fetchLinks()">Fetch All Links</button>
+  <button (click)="showTotalLinks()">Show Total Links</button>
+  <button *ngIf="toShow" (click)="hideLinks()">Hide Links</button> 
+
+  <p *ngIf="totalLinks !== null">Total Links: {{ totalLinks }}</p>
+
+  <table *ngIf="toShow">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Link</th>
+        <th>Description</th>
+        <th>Tags</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <td>{{ post.name }}</td>
+        <td><a [href]="post.url" target="_blank">Watch</a></td>
+        <td>{{ post.description || 'No description' }}</td>
+        <td>{{ post.tags || 'No tags' }}</td>
+        <td>
+          <button (click)="deleteLink(post.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

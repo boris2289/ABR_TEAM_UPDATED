@@ -1,0 +1,10 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+    <label>Username:</label>
+    <input formControlName="username" required />
+    
+    <label>Password:</label>
+    <input type="password" formControlName="password" required />
+  
+    <button type="submit" [disabled]="form.invalid">Register</button>
+  </form>
+  

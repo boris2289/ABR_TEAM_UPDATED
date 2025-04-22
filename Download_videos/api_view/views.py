@@ -12,7 +12,10 @@ import requests
 
 
 def view_api(request):
-    return render(request, 'api-view.html')
+    with open('token.txt','r') as file:
+        token = file.readline()
+
+    return render(request, 'api-view.html', {'token': token})
 
 
 mistakes = Mistakes()

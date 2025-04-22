@@ -10,6 +10,7 @@ from rest_framework import status
 from .models import YouTubeLink, Comment
 from .serializers import CommentSerializer
 
+
 @api_view(['GET', 'POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -55,7 +56,6 @@ def add_comment(request, pk):
             serializer.save(youtube_link=youtube_link, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 
 class YouTubeLinkDetail(APIView):

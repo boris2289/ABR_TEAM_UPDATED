@@ -1,15 +1,14 @@
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(to right, #141e30, #243b55);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
 }
-
-.v56_2 {
+.container {
     background: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 10px;
@@ -17,20 +16,14 @@ body {
     width: 350px;
     text-align: center;
 }
-
-.v56_3 {
-    font-size: 1.8em;
-    font-weight: bold;
+.container h2 {
     margin-bottom: 20px;
-    display: block;
+    font-size: 1.8em;
 }
-
-form {
-    display: flex;
-    flex-direction: column;
+.input-group {
+    margin-bottom: 15px;
 }
-
-input[type="text"] {
+.input-group input {
     width: 100%;
     padding: 10px;
     font-size: 1em;
@@ -39,14 +32,11 @@ input[type="text"] {
     outline: none;
     background: rgba(255, 255, 255, 0.2);
     color: white;
-    margin-bottom: 15px;
 }
-
-input[type="text"]::placeholder {
+.input-group input::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
-
-.bb {
+.btn {
     width: 100%;
     padding: 12px;
     font-size: 1.2em;
@@ -57,7 +47,6 @@ input[type="text"]::placeholder {
     cursor: pointer;
     transition: 0.3s;
 }
-
-.bb:hover {
+.btn:hover {
     background: #0072ff;
 }

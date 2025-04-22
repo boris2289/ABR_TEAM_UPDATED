@@ -1,20 +1,26 @@
-from Download_videos.wsgi import *
-from django.core.checks import messages
+import requests
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
-
-from link_collector.views import collector
 from regform.models import People
-from Download_videos.wsgi import *
+from django.shortcuts import render, redirect
 
 
 def index_1(request):
     if request.method == 'POST':
         login = request.POST['username']
         password = request.POST['password']
-        new_user = People(name=login, password=password)
-        new_user.save()
-        return redirect("login/")
+        body = {
+            'username': login,
+            'password': password
+        }
+        url = 'http://127.0.0.1:1278/register/'
+        response = requests.post(url, data=body)
+        if response.status_code == 201:
+            return redirect("login/")
+        else:
+            print('Error: User already exists or other issue')
+            return render(request, 'registration_form.html',
+                          {'error': 'User already exists or there was a problem with registration.'})
+
     return render(request, 'registration_form.html')
 
 
@@ -23,15 +29,25 @@ def congrat(request):
 
 
 def login_page(request):
-    all_people = People.objects.all()
-    s1 = []
-    for i in all_people:
-        s1.append([i.name, i.password])
     if request.method == 'POST':
+
         given_login = request.POST.get('username')
         given_pass = request.POST.get('password')
-        redirected = False
-        for i in range(len(s1)):
-            if s1[i][0] == given_login and s1[i][1] == given_pass:
-                return HttpResponseRedirect('/congrat')
+
+        body = {
+            'username': given_login,
+            'password': given_pass
+        }
+        url = 'http://127.0.0.1:1278/api/login/'
+        response = requests.post(url, data=body)
+        token = response.json()['token']
+
+        with open('token.txt', 'wt') as file:
+            file.write(token)
+
+        if response.status_code == 200:
+            return HttpResponseRedirect('/congrat')
+        else:
+            return render(request, 'login.html', {'error': 'Registration failed or user already exists.'})
+
     return render(request, 'login.html')

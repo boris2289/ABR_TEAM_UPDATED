@@ -1,25 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<link rel="stylesheet" href="">
+
 <body>
-</div>
-<div class="v56_2">
-</div>
-<span class="v56_3">Login</span>
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="username" class="user" placeholder="Username"><br>
-    <input type="text" name="password" class="pass" placeholder="Password"><br>
-    <button type="submit" value="Submit" class="bb">Submit</button>
-</form>
-<div class="v56_8"></div>
-<div class="v56_11"></div>
-<div class="v56_10"></div>
-</div>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username">
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
 </body>
+<script>
+    const loginForm = document.getElementById('login-form');
+    const errorMessage = document.getElementById('error-message');
+
+    loginForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch("http://127.0.0.1:1278/api/login/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('authToken', data.token); // store token
+                window.location.href = "/congrat";
+            } else {
+                errorMessage.textContent = data.detail || "Login failed.";
+            }
+        } catch (err) {
+            errorMessage.textContent = "Something went wrong.";
+            console.error("Error:", err);
+        }
+    });
+</script>
+
 </html>
